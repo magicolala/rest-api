@@ -75,4 +75,7 @@ fos_rest:
         view_response_listener: true
     format_listener:
         rules:
-            - { path: '^/', priorities: ['json'], fallback_format: 'json' }
+            - { path: '^/', priorities: ['json'], fallback_format: 'json', prefer_extension: false }
+    # configuration à rajouter pour désactiver le body listener
+    body_listener:
+        enabled: true
