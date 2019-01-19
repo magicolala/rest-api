@@ -45,6 +45,10 @@ class UserController extends Controller
             ->find($request->get('id'));
         /* @var $user User */
 
+        if (empty($user)) {
+            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
+
         $formatted = [
             'id' => $user->getId(),
             'firstname' => $user->getFirstname(),
