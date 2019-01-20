@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity()
@@ -11,7 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
-   /**
+    const MATCH_VALUE_THRESHOLD = 25;
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -32,6 +35,17 @@ class User
      * @ORM\Column(type="string")
      */
     protected $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Preference", mappedBy="user")
+     * @var Preference[]
+     */
+    protected $preferences;
+
+    public function __construct()
+    {
+        $this->preferences = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -71,5 +85,29 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    public function getPreferences()
+    {
+        return $this->preferences;
+    }
+
+    public function setPreferences($preferences)
+    {
+        $this->preferences = $preferences;
+    }
+
+    public function preferencesMatch($themes)
+    {
+        $matchValue = 0;
+        foreach ($this->preferences as $preference) {
+            foreach ($themes as $theme) {
+                if ($preference->match($theme)) {
+                    $matchValue += $preference->getValue() * $theme->getValue();
+                }
+            }
+        }
+
+        return $matchValue >= self::MATCH_VALUE_THRESHOLD;
     }
 }
