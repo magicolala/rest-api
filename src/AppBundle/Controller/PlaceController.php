@@ -38,7 +38,7 @@ class PlaceController extends Controller
         /* @var $place Place */
 
         if (empty($place)) {
-            return \FOS\RestBundle\View\View::create(['message' => 'Place not found'], Response::HTTP_NOT_FOUND);
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Place not found');
         }
 
         return $place;
@@ -113,7 +113,7 @@ class PlaceController extends Controller
         /* @var $place Place */
 
         if (empty($place)) {
-            return \FOS\RestBundle\View\View::create(['message' => 'Place not found'], Response::HTTP_NOT_FOUND);
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Place not found');
         }
 
         $form = $this->createForm(PlaceType::class, $place);

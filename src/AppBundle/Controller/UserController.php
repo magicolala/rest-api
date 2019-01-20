@@ -51,7 +51,7 @@ class UserController extends Controller
     public function postUsersAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user, ['validation_groups'=>['Default', 'New']]);
+        $form = $this->createForm(UserType::class, $user, ['validation_groups' => ['Default', 'New']]);
 
         $form->submit($request->request->all());
 
@@ -117,7 +117,7 @@ class UserController extends Controller
         }
 
         if ($clearMissing) { // Si une mise à jour complète, le mot de passe doit être validé
-            $options = ['validation_groups'=>['Default', 'FullUpdate']];
+            $options = ['validation_groups' => ['Default', 'FullUpdate']];
         } else {
             $options = []; // Le groupe de validation par défaut de Symfony est Default
         }
@@ -174,6 +174,6 @@ class UserController extends Controller
 
     private function userNotFound()
     {
-        return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('User not found');
     }
 }
