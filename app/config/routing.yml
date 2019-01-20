@@ -1,3 +1,7 @@
+auth-tokens:
+    type:     rest
+    resource: AppBundle\Controller\AuthTokenController
+
 places:
     type:     rest
     resource: AppBundle\Controller\PlaceController
