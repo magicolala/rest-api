@@ -4,6 +4,7 @@ imports:
     - resource: services.yml
 parameters:
     locale: en
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 framework:
     secret: "%secret%"
     router:
@@ -14,7 +15,7 @@ framework:
     validation:
         enable_annotations: true
     serializer:
-        enabled: true
+        enabled: false
     templating:
         engines:
             - twig
@@ -70,3 +71,10 @@ fos_rest:
         enabled: true
     param_fetcher_listener:
         enabled: true
+    serializer:
+        serialize_null: true
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: "Y-m-d\\TH:i:sP"
+            default_timezone: "UTC"
