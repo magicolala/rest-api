@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity()
@@ -87,5 +88,63 @@ class Place
     public function setThemes($themes)
     {
         $this->themes = $themes;
+    }
+
+    /**
+     * Add price
+     *
+     * @param \AppBundle\Entity\Price $price
+     *
+     * @return Place
+     */
+    public function addPrice(\AppBundle\Entity\Price $price)
+    {
+        $this->prices[] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Remove price
+     *
+     * @param \AppBundle\Entity\Price $price
+     */
+    public function removePrice(\AppBundle\Entity\Price $price)
+    {
+        $this->prices->removeElement($price);
+    }
+
+    /**
+     * Get prices
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
+    /**
+     * Add theme
+     *
+     * @param \AppBundle\Entity\Theme $theme
+     *
+     * @return Place
+     */
+    public function addTheme(\AppBundle\Entity\Theme $theme)
+    {
+        $this->themes[] = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Remove theme
+     *
+     * @param \AppBundle\Entity\Theme $theme
+     */
+    public function removeTheme(\AppBundle\Entity\Theme $theme)
+    {
+        $this->themes->removeElement($theme);
     }
 }

@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les anno
 use AppBundle\Form\Type\CredentialsType;
 use AppBundle\Entity\AuthToken;
 use AppBundle\Entity\Credentials;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthTokenController extends Controller
 {

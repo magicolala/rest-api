@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *      uniqueConstraints={@ORM\UniqueConstraint(name="users_email_unique",columns={"email"})}
  * )
  */
-class User
+class User implements UserInterface
 {
     const MATCH_VALUE_THRESHOLD = 25;
 
